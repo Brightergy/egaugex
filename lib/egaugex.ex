@@ -118,10 +118,10 @@ defmodule Egaugex do
     end
 
     @doc """
-    Converts hex to integer value
+    Converts hex to integer value as string representation
     """
     def hex_to_int(hex) do
-      hex |> String.upcase |> Base.decode16! |> :binary.decode_unsigned |> to_string
+      hex |> String.to_integer(16) |> Integer.to_string
     end
   end
 end
