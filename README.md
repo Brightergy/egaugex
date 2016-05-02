@@ -1,4 +1,4 @@
-# Egaugex
+# Egaugex [![Build Status](https://semaphoreci.com/api/v1/techgaun/egaugex/branches/master/badge.svg)](https://semaphoreci.com/techgaun/egaugex) [![Coverage Status](https://coveralls.io/repos/github/Brightergy/egaugex/badge.svg?branch=master)](https://coveralls.io/github/Brightergy/egaugex?branch=master)
 > Gets and parses egauge data given the egauge device id.
 
 ## Installation
