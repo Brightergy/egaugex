@@ -119,6 +119,7 @@ defmodule Egaugex do
           |> List.flatten
         end)
         |> List.zip
+        |> Enum.map(fn x -> Tuple.to_list(x) end)
 
       data = Enum.zip(registers, values) |> Enum.into(%{})
       %{attributes: atts, data: data}
