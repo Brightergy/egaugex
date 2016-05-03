@@ -22,8 +22,14 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 ```elixir
 import Egaugex
 
+# hits `/cgi-bin/egauge-show?S&n=60` by default
 egauge_parser("egaugexxxxx")
 
 # with username and password auth
-egauge_parser("egaugexxxxx", "owner", "default")
+egauge_parser("egaugexxxxx", ["username": "owner", "password": "default"])
+
+# with custom url
+egauge_parser("egauge17983", [{:url, "/cgi-bin/egauge-show?S&a&t=1462299644"}, {:username, "owner"}, {:password, "default"}])
 ```
+
+You can pass the list of arguments as keyword arguments as shown in example above.

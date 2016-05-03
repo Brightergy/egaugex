@@ -35,7 +35,7 @@ defmodule Egaugex.Mixfile do
     [
       {:httpoison, "~> 0.8.0"},
       {:floki, "~> 0.8"},
-      {:excoveralls, github: "parroty/excoveralls", only: :test}
+      {:excoveralls, "~> 0.5.4", only: :test}
     ]
   end
 
