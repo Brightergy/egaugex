@@ -8,7 +8,12 @@ defmodule Egaugex do
   @doc """
   Module entry point to be used by external programs
   """
-  def egauge_parser(egauge_id, username \\ nil, password \\ nil, uri \\ "/cgi-bin/egauge-show?S&n=60", realm \\ "eGauge Administration") do
+  @spec egauge_parser(String.t, List.t) :: Tuple.t
+  def egauge_parser(egauge_id, opts \\ []) do
+    username = opts[:username] || nil
+    password = opts[:password] || nil
+    uri = opts[:uri] || "/cgi-bin/egauge-show?S&n=60"
+    realm = opts[:realm] || "eGauge Administration"
     result = Egaugex.Fetcher.get_egauge_data(egauge_id, username, password, uri, realm)
     case result do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
