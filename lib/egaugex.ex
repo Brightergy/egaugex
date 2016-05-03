@@ -1,5 +1,4 @@
 defmodule Egaugex do
-  require Logger
   require HTTPoison
 
   @moduledoc """
