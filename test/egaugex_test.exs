@@ -35,8 +35,8 @@ defmodule EgaugexTest do
     """
     result = Egaugex.Parser.parse_egauge_data(data)
     assert result == %{attributes: %{"columns" => "4", "epoch" => "1422034920", "time_delta" => "1", "time_stamp" => "1462215365"},
-      data: %{"CT1" => {"-8380988951", "-8380987261"}, "CT2" => {"-9517686129", "-9517684585"}, "CT3" => {"-8703109347", "-8703107716"},
-      "Grid" => {"-26601784427", "-26601779562"}}}
+      data: %{"CT1" => ["-8380988951", "-8380987261"], "CT2" => ["-9517686129", "-9517684585"], "CT3" => ["-8703109347", "-8703107716"],
+      "Grid" => ["-26601784427", "-26601779562"]}}
   end
 
   test "hex_to_int converts hex to integer correctly" do
