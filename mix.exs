@@ -11,7 +11,9 @@ defmodule Egaugex.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps,
      test_coverage: [tool: ExCoveralls],
-     preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test, "coveralls.semaphore": :test]
+     preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test, "coveralls.semaphore": :test],
+     docs: [logo: "logo/brighterlink_logo.png",
+            extras: ["README.md"]]
    ]
   end
 
@@ -35,7 +37,9 @@ defmodule Egaugex.Mixfile do
     [
       {:httpoison, "~> 0.8.0"},
       {:floki, "~> 0.8"},
-      {:excoveralls, "~> 0.5.4", only: :test}
+      {:excoveralls, "~> 0.5.4", only: :test},
+      {:earmark, "~> 0.1", only: :dev},
+      {:ex_doc, "~> 0.11", only: :dev}
     ]
   end
 
@@ -46,7 +50,8 @@ defmodule Egaugex.Mixfile do
         "Jonathan Hockman",
         "Bruce Wang"
       ],
-      licenses: ["MIT"]
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/Brightergy/egaugex"}
     ]
   end
 end
