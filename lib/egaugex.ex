@@ -1,5 +1,5 @@
 defmodule Egaugex do
-  # require Logger
+  require Logger
   require HTTPoison
 
   @moduledoc """
@@ -106,15 +106,23 @@ defmodule Egaugex do
           end
       end) |> Enum.into(%{})
 
-      # get first register name
-      {_, _, [register_name]} = Floki.find(values, "cname") |> List.first
+      # create list of registers
+      registers = values
+        |> Floki.find("cname")
+        |> Enum.map(fn {_, _, register} -> register end)
+        |> List.flatten
 
       # get values for first register name
-      values = Floki.find(values, "r") |> Enum.map(fn r ->
-          {_, _, [value]} = Floki.find(r, "c") |> List.first
-          value
-      end)
-      %{attributes: atts, register: register_name, values: values}
+      values = Floki.find(values, "r")
+        |> Enum.map(fn r ->
+          Floki.find(r, "c")
+          |> Enum.map(fn {_, _, value} -> value end)
+          |> List.flatten
+        end)
+      |> List.zip
+
+      data = Enum.zip(registers, values) |> Enum.into(%{})
+      %{attributes: atts, data: data}
     end
 
     @doc """
