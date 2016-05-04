@@ -1,4 +1,4 @@
-# Egaugex [![Build Status](https://semaphoreci.com/api/v1/techgaun/egaugex/branches/master/badge.svg)](https://semaphoreci.com/techgaun/egaugex) [![Coverage Status](https://coveralls.io/repos/github/Brightergy/egaugex/badge.svg?branch=master)](https://coveralls.io/github/Brightergy/egaugex?branch=master)
+# Egaugex [![Hex version](https://img.shields.io/hexpm/v/egaugex.svg "Hex version")](https://hex.pm/packages/egaugex) ![Hex downloads](https://img.shields.io/hexpm/dt/egaugex.svg "Hex downloads") [![Build Status](https://semaphoreci.com/api/v1/techgaun/egaugex/branches/master/badge.svg)](https://semaphoreci.com/techgaun/egaugex) [![Coverage Status](https://coveralls.io/repos/github/Brightergy/egaugex/badge.svg?branch=master)](https://coveralls.io/github/Brightergy/egaugex?branch=master)
 > Gets and parses egauge data given the egauge device id.
 
 ## Installation
