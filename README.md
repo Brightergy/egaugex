@@ -28,8 +28,8 @@ egauge_parser("egaugexxxxx")
 # with username and password auth
 egauge_parser("egaugexxxxx", ["username": "owner", "password": "default"])
 
-# with custom url
-egauge_parser("egauge17983", [{:url, "/cgi-bin/egauge-show?S&a&t=1462299644"}, {:username, "owner"}, {:password, "default"}])
+# with custom uri
+egauge_parser("egauge17983", [{:uri, "/cgi-bin/egauge-show?S&a&t=1462299644"}, {:username, "owner"}, {:password, "default"}])
 ```
 
 You can pass the list of arguments as keyword arguments as shown in example above.
