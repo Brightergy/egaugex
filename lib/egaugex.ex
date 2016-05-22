@@ -87,7 +87,8 @@ defmodule Egaugex do
       if username != nil && password != nil do
         auth_header = Egaugex.Auth.create_digest_auth_header(username, password, uri, realm)
       end
-      url = if base_url |> is_nil, do: "http://#{device_ident}.egaug.es#{uri}", else: base_url
+      base_url = if base_url |> is_nil, do: "http://#{device_ident}.egaug.es#{uri}", else: base_url
+      url = base_url <> uri
       get(url, [{"Authorization", auth_header}])
     end
   end
