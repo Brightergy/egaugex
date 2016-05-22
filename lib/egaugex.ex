@@ -12,9 +12,10 @@ defmodule Egaugex do
   def egauge_parser(egauge_id, opts \\ []) do
     username = opts[:username] || nil
     password = opts[:password] || nil
+    base_url = opts[:base_url] || nil
     uri = opts[:uri] || "/cgi-bin/egauge-show?S&n=60"
     realm = opts[:realm] || "eGauge Administration"
-    result = Egaugex.Fetcher.get_egauge_data(egauge_id, username, password, uri, realm)
+    result = Egaugex.Fetcher.get_egauge_data(egauge_id, username, password, uri, realm, base_url)
     case result do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {:ok, body}
@@ -80,13 +81,13 @@ defmodule Egaugex do
     @doc """
     Gets egauge data from egauge cloud
     """
-    def get_egauge_data(device_ident, username, password, uri, realm) do
+    def get_egauge_data(device_ident, username, password, uri, realm, base_url) do
       # if username and password are set, get the auth header
       auth_header = nil
       if username != nil && password != nil do
         auth_header = Egaugex.Auth.create_digest_auth_header(username, password, uri, realm)
       end
-      url = "http://#{device_ident}.egaug.es#{uri}"
+      url = if base_url |> is_nil, do: "http://#{device_ident}.egaug.es#{uri}", else: base_url
       get(url, [{"Authorization", auth_header}])
     end
   end
