@@ -26,4 +26,4 @@ egauge_parser("egaugexxxxx", ["username": "owner", "password": "default"])
 egauge_parser("egauge17983", [{:uri, "/cgi-bin/egauge-show?S&a&t=1462299644"}, {:username, "owner"}, {:password, "default"}])
 ```
 
-You can pass the list of arguments as keyword arguments as shown in example above.
+You can pass the list of arguments as keyword arguments as shown in example above. The other keyword arguments are `base_url` and `realm`.
