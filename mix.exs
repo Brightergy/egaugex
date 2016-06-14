@@ -3,7 +3,7 @@ defmodule Egaugex.Mixfile do
 
   def project do
     [app: :egaugex,
-     version: "0.0.2",
+     version: "0.0.3",
      description: "A simple egauge parser to retrieve and parse data from egauge devices",
      package: package,
      elixir: "~> 1.2",
