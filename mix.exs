@@ -3,7 +3,7 @@ defmodule Egaugex.Mixfile do
 
   def project do
     [app: :egaugex,
-     version: "0.0.4",
+     version: "0.0.5",
      description: "A simple egauge parser to retrieve and parse data from egauge devices",
      package: package,
      elixir: "~> 1.2",
@@ -35,7 +35,7 @@ defmodule Egaugex.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:httpoison, "~> 0.8.0"},
+      {:httpoison, "~> 0.9.0"},
       {:floki, "~> 0.8"},
       {:excoveralls, "~> 0.5.4", only: :test},
       {:earmark, "~> 0.1", only: :dev},
