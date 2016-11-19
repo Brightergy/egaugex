@@ -10,9 +10,9 @@ defmodule Egaugex do
   """
   @spec egauge_parser(String.t, List.t) :: Tuple.t
   def egauge_parser(egauge_id, opts \\ []) do
-    username = opts[:username] || nil
-    password = opts[:password] || nil
-    base_url = opts[:base_url] || nil
+    username = opts[:username]
+    password = opts[:password]
+    base_url = opts[:base_url]
     uri = opts[:uri] || "/cgi-bin/egauge-show?S&n=60"
     realm = opts[:realm] || "eGauge Administration"
     result = Egaugex.Fetcher.get_egauge_data(egauge_id, username, password, uri, realm, base_url)
@@ -24,53 +24,19 @@ defmodule Egaugex do
     end
   end
 
-  defmodule Auth do
-    @moduledoc """
-    Egaugex.Auth - module to create digest header that's compatible with egauge http service
-    """
-
-    @doc """
-    Creates digest authorization header based on username, password, uri, realm and method
-    """
-    def create_digest_auth_header(username, password, uri, realm, method \\ "GET") do
-      ha1 = :crypto.hash(:md5, Enum.join([username, realm, password], ":")) |> Base.encode16 |> String.downcase
-      ha2 = :crypto.hash(:md5, Enum.join([method, uri], ":")) |> Base.encode16 |> String.downcase
-      nonce = :crypto.hash(:md5, random_string(16)) |> Base.encode16 |> String.downcase
-      auth = :crypto.hash(:md5, Enum.join([ha1, nonce, ha2], ":")) |> Base.encode16 |> String.downcase
-      'Digest username="#{username}", realm="#{realm}", nonce="#{nonce}", uri="#{uri}", response="#{auth}", opaque=""'
-    end
-
-    @doc """
-    Creates random string of given length
-    Used for random nonce creation
-    """
-    def random_string(length) do
-      :crypto.strong_rand_bytes(length) |> Base.url_encode64 |> binary_part(0, length)
-    end
-  end
-
   defmodule Fetcher do
-    use HTTPoison.Base
-
     @moduledoc """
     Module to fetch data from egauge cloud
     Also performs transformation via HTTPoison.Base overrides
     """
 
-    # @doc """
-    # Create url from base_url and first parameter of HTTPoison get/post/put/delete
-    # """
-    # def process_url(device_ident) do
-    #   uri = "/cgi-bin/egauge-show?S&n=60"
-    #   "http://egauge17983.egaug.es#{uri}"
-    # end
+    use HTTPoison.Base
 
     @doc """
     Decode the xml response body
     """
     @spec process_response_body(binary) :: term
     def process_response_body(body) do
-      # this is the perfect place to add custom logic for response body
       body
       |> Egaugex.Parser.parse_egauge_data
     end
@@ -82,14 +48,11 @@ defmodule Egaugex do
     Gets egauge data from egauge cloud
     """
     def get_egauge_data(device_ident, username, password, uri, realm, base_url) do
-      # if username and password are set, get the auth header
-      auth_header = nil
-      if username != nil && password != nil do
-        auth_header = Egaugex.Auth.create_digest_auth_header(username, password, uri, realm)
-      end
+      auth_header = if username != nil && password != nil,
+        do: HTTPDigex.create_digest(username, password, realm, uri), else: nil
       base_url = if base_url |> is_nil, do: "http://#{device_ident}.egaug.es", else: base_url
       url = base_url <> uri
-      get(url, [{"Authorization", auth_header}])
+      get(url, [{"Authorization", auth_header}, {"User-Agent", "Egaugex"}])
     end
   end
 
