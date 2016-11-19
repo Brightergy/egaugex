@@ -6,13 +6,13 @@
 
 ## Installation
 
-The package can be installed from hex as:
+Add egaugex to your list of dependencies in `mix.exs`:
 
-  1. Add egaugex to your list of dependencies in `mix.exs`:
-
-        def deps do
-          [{:egaugex, "~> 0.0.4"}]
-        end
+```elixir
+def deps do
+  [{:egaugex, "~> 0.0.5"}]
+end
+```
 
 ## Usage
 
