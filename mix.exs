@@ -2,19 +2,25 @@ defmodule Egaugex.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :egaugex,
-     version: "0.1.0",
-     description: "A simple egauge client to retrieve and parse data from egauge devices",
-     package: package,
-     elixir: "~> 1.2",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps,
-     test_coverage: [tool: ExCoveralls],
-     preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test, "coveralls.semaphore": :test],
-     docs: [logo: "logo/brighterlink_logo.png",
-            extras: ["README.md"]]
-   ]
+    [
+      app: :egaugex,
+      version: "0.1.0",
+      description: "A simple egauge client to retrieve and parse data from egauge devices",
+      package: package(),
+      elixir: "~> 1.2",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "coveralls.semaphore": :test
+      ],
+      docs: [logo: "logo/brighterlink_logo.png", extras: ["README.md"]]
+    ]
   end
 
   # Configuration for the OTP application
